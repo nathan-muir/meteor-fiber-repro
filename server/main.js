@@ -20,12 +20,12 @@ Meteor.startup(function () {
 
 Meteor.methods({
   set: function () {
-    Widgets.update({}, {$set: {a: Math.random()}}, {multi:true});
-    console.log('set complete');
+    var n = Widgets.update({}, {$set: {a: Math.random()}}, {multi:true});
+    console.log('set complete', n);
   },
   unset: function () {
-    Widgets.update({}, {$unset: {a: 1}}, {multi:true});
-    console.log('unset complete');
+    var n = Widgets.update({}, {$unset: {a: 1}}, {multi:true});
+    console.log('unset complete', n);
   },
 });
 
