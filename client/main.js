@@ -8,7 +8,10 @@ Template.hello.events({
     // increment the counter when button is clicked
     var callId = `Set ${Random.id()}`;
     console.time(callId);
-    Meteor.call("set", function(err, res){
+    Meteor.apply("set", [], { noRetry: true }, function (err, res) {
+      if (err) {
+        console.error('set failed', err);
+      }
       console.timeEnd(callId);
     });
   },
@@ -16,7 +19,10 @@ Template.hello.events({
     // increment the counter when button is clicked
     var callId = `Unset ${Random.id()}`;
     console.time(callId);
-    Meteor.call("unset", function(err, res){
+    Meteor.call("unset", [], { noRetry: true }, function (err, res) {
+      if (err) {
+        console.error('unset failed', err);
+      }
       console.timeEnd(callId);
     });
   },
