@@ -1,16 +1,24 @@
+import { Random } from 'meteor/random';
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
 Template.hello.events({
   'click button.set'(event, instance) {
     // increment the counter when button is clicked
-    Meteor.call("set");
+    var callId = `Set ${Random.id()}`;
+    console.time(callId);
+    Meteor.call("set", function(err, res){
+      console.timeEnd(callId);
+    });
   },
   'click button.unset'(event, instance) {
     // increment the counter when button is clicked
-    Meteor.call("unset");
+    var callId = `Unset ${Random.id()}`;
+    console.time(callId);
+    Meteor.call("unset", function(err, res){
+      console.timeEnd(callId);
+    });
   },
 });
 
